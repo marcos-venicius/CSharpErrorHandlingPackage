@@ -15,6 +15,13 @@ public class Error<T> where T : class
         __distinct = false;
     }
 
+    public Error<T> SetDistinct(bool distinct)
+    {
+        __distinct = distinct;
+
+        return this;
+    }
+
     public override string ToString()
     {
         return $"{Key}:{Value}";
