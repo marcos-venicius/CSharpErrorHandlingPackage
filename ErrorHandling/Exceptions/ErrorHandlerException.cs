@@ -1,7 +1,9 @@
 namespace ErrorHandling.Exceptions;
 
-public class ErrorHandlerException<T> : ErrorHandlerBaseException<T> where T : class
+public class ErrorHandlerException<T> : ErrorHandlerBaseException where T : class
 {
+    public override IEnumerable<T> Errors { get; }
+
     public ErrorHandlerException(IEnumerable<T> errors) : base(GetMessage(errors.Count()))
     {
         Errors = errors;

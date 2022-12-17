@@ -11,7 +11,7 @@ public class ErrorHandlerBaseExceptionTests
     {
         Assert.ThrowsAsync<ErrorHandlerBaseException>(() =>
         {
-            throw new ErrorHandlerBaseException<CustomExceptionType1>("my error");
+            throw new ErrorHandlerException<CustomExceptionType1>(new List<CustomExceptionType1>());
         });
     }
 
@@ -20,16 +20,16 @@ public class ErrorHandlerBaseExceptionTests
     {
         Assert.ThrowsAsync<ErrorHandlerBaseException>(() =>
         {
-            throw new ErrorHandlerBaseException("my error");
+            throw new ErrorHandlerException<string>(new List<string>());
         });
     }
 
     [Fact]
     public void Should_Catch_Especific_Exception_Types()
     {
-        Assert.ThrowsAsync<ErrorHandlerBaseException<CustomExceptionType1>>(() =>
+        Assert.ThrowsAsync<ErrorHandlerException<CustomExceptionType1>>(() =>
         {
-            throw new ErrorHandlerBaseException<CustomExceptionType1>("my error");
+            throw new ErrorHandlerException<CustomExceptionType1>(new List<CustomExceptionType1>());
         });
     }
 }

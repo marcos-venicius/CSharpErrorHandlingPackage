@@ -46,14 +46,15 @@ public class ErrorHandler<T> : IDisposable where T : class
                 throw new ErrorHandlerException<Error<T>>(errors);
             }
         }
-        else
+        else if (Errors.Any())
         {
-            if (Errors.Any())
-            {
-                throw new ErrorHandlerException<Error<T>>(Errors);
-            }
+            throw new ErrorHandlerException<Error<T>>(Errors);
         }
     }
 }
 
-public class ErrorHandler : ErrorHandler<string> { }
+public class ErrorHandler : ErrorHandler<string>
+{
+    public ErrorHandler() : base() { }
+    public ErrorHandler(bool distinct) : base(distinct) { }
+}
