@@ -1,7 +1,7 @@
 namespace ErrorHandling.Exceptions;
 
 
-public abstract class ErrorHandlerBaseException<T> : ApplicationException
+public class ErrorHandlerBaseException<T> : ApplicationException
 {
     public virtual IEnumerable<T> Errors { get; internal set; }
 
@@ -11,7 +11,7 @@ public abstract class ErrorHandlerBaseException<T> : ApplicationException
     }
 }
 
-public abstract class ErrorHandlerBaseException : ErrorHandlerBaseException<object>
+public class ErrorHandlerBaseException : ErrorHandlerBaseException<object>
 {
     public ErrorHandlerBaseException(string message) : base(message) { }
 }
