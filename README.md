@@ -121,7 +121,7 @@ if you want to catch a specific exception type you can:
 try {
     ...
 }
-catch (ErrorHandlerBaseException<Error<string>> exception)
+catch (ErrorHandlerException<Error<string>> exception)
 {
     Console.WriteLine(exception.Message);
 
