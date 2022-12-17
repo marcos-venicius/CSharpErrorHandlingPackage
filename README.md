@@ -1,5 +1,11 @@
 # ErrorHandling
 
+## Installation
+
+```sh
+dotnet add package DevOne.Utils.ErrorHandling --version 1.0.0
+```
+
 ### Usage
 
 - ErrorHandler with value as string
