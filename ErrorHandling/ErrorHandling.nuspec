@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>DevOne.Utils.ErrorHandling</id>
+    <version>1.2.0</version>
+    <title>DevOne ErrorHandling</title>
+    <authors>Marcos Venicius</authors>
+    <owners>marcos_venicius</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <icon>images\icon.png</icon>
+    <readme>docs\README.md</readme>
+    <projectUrl>https://github.com/marcos-venicius/CSharpErrorHandlingPackage</projectUrl>
+    <repository type="git" url="https://github.com/marcos-venicius/CSharpErrorHandlingPackage.git" branch="main" commit="f666dd4ccc9cc71d0f65ad1dbb34e861bcb443ad" />
+    <description>Handle errors more easily</description>
+    <releaseNotes>Add missing tests and improve exceptions</releaseNotes>
+
+    <copyright>Copyright ©2022 Marcos Venicius</copyright>
+    <tags>utilities error-handling tools</tags>
+  </metadata>
+  <files>
+      <file src="..\icon.png" target="images\" />
+      <file src="..\README.md" target="docs\" />
+  </files>
+</package>
