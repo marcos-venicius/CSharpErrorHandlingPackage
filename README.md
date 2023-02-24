@@ -3,7 +3,7 @@
 ## Installation
 
 ```sh
-dotnet add package DevOne.Utils.ErrorHandling --version 1.2.0
+dotnet add package DevOne.Utils.ErrorHandling --version 1.2.1
 ```
 
 ### Usage
