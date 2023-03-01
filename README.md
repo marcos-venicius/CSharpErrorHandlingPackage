@@ -3,7 +3,7 @@
 ## Installation
 
 ```sh
-dotnet add package DevOne.Utils.ErrorHandling --version 1.2.1
+dotnet add package DevOne.Utils.ErrorHandling --version 2.0.0
 ```
 
 ### Usage
@@ -14,15 +14,15 @@ dotnet add package DevOne.Utils.ErrorHandling --version 1.2.1
 {
     string name = "marcos test";
 
-    using (var eh = new ErrorHandler())
+    using (var eh = new ErrorHandler<string>())
     {
         switch (name.Length)
         {
-            case < 3:
-                eh.Add(new(nameof(name), "name length must be greater than 2"));
+            case < 3: // with indexer
+                eh[nameof(name)] = "name length must be greater than 2";
                 break;
-            case > 25:
-                eh.Add(new(nameof(name), "name length must be less than 26"));
+            case > 25: // with method
+                eh.Add(nameof(name), "name length must be less than 26");
                 break;
             default:
                 break;
@@ -32,7 +32,7 @@ dotnet add package DevOne.Utils.ErrorHandling --version 1.2.1
 
         if (!regex.IsMatch(name))
         {
-            eh.Add(new(nameof(name), "name format is invalid"));
+            eh.Add(nameof(name), "name format is invalid");
         }
     }
 }
@@ -47,15 +47,15 @@ if you want to verify errors in a specific part of your code, you can avoid `usi
 {
     string name = "marcos test";
 
-    var eh = new ErrorHandler();
+    var eh = new ErrorHandler<string>();
 
     switch (name.Length)
     {
         case < 3:
-            eh.Add(new(nameof(name), "name length must be greater than 2"));
+            eh[nameof(name)] = "name length must be greater than 2";
             break;
         case > 25:
-            eh.Add(new(nameof(name), "name length must be less than 26"));
+            eh[nameof(name)] = "name length must be less than 26";
             break;
         default:
             break;
@@ -65,7 +65,7 @@ if you want to verify errors in a specific part of your code, you can avoid `usi
 
     if (!regex.IsMatch(name))
     {
-        eh.Add(new(nameof(name), "name format is invalid"));
+        eh[nameof(name)] = "name format is invalid";
     }
 
     ...
@@ -93,7 +93,7 @@ if you want a diferent error value type use can do this like that:
 * and now you need pass this type as the value
 ```cs
 {
-    eh.Add(new("my key", new CustomErrorValue("message", "id", "location")));
+    eh["my key"] = new CustomErrorValue("message", "id", "location");
 }
 ```
 

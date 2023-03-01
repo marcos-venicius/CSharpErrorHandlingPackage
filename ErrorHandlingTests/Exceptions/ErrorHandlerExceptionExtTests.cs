@@ -1,3 +1,4 @@
+using ErrorHandling.Extensions;
 using ErrorHandling.Models;
 
 namespace ErrorHandlingTests.Exceptions;
@@ -7,7 +8,8 @@ public class ErrorHandlerExceptionExtTests
     [Fact]
     public void Should_Get_Error_By_Key_If_They_Exists_On_IEnumerable_Of_Error_Of_String()
     {
-        var errors = new List<Error<string>>() {
+        var errors = new List<Error<string>>()
+        {
             new("a", "error a"),
             new("b", "error b"),
         };
@@ -26,9 +28,10 @@ public class ErrorHandlerExceptionExtTests
     [Fact]
     public void Should_Get_Error_By_Key_If_They_Exists_On_IEnumerable_Of_Error_Of_Any_Type()
     {
-        var errors = new List<Error<ASDF>>() {
-            new("test", new() { Message = "testing" }),
-            new("test2", new() { Message = "testing 2" }),
+        var errors = new List<Error<ASDF>>
+        {
+            new("test", new ASDF { Message = "testing" }),
+            new("test2", new ASDF { Message = "testing 2" }),
         };
 
         var error = errors.GetErrorByKey("test");
@@ -40,7 +43,10 @@ public class ErrorHandlerExceptionExtTests
     [Fact]
     public void Should_Return_Null_When_Not_Found_An_Error()
     {
-        var errors = new List<Error<string>>();
+        var errors = new List<Error<string>>
+        {
+            new("test", "test")
+        };
 
         var error = errors.GetErrorByKey("any");
 

@@ -1,25 +1,23 @@
 namespace ErrorHandling.Models;
 
-public class Error<T> where T : class
+public sealed class Error<T>
 {
-    internal bool __distinct;
+    internal bool Distinct;
 
     public string Key { get; }
-    public T Value { get; }
+    public T? Value { get; }
 
-    public Error(string key, T value)
+    public Error(string key, T? value)
     {
         Key = key;
         Value = value;
 
-        __distinct = false;
+        Distinct = false;
     }
 
-    public Error<T> SetDistinct(bool distinct)
+    internal Error(string key, T? value, bool distinct) : this(key, value)
     {
-        __distinct = distinct;
-
-        return this;
+        Distinct = distinct;
     }
 
     public override string ToString()
@@ -27,30 +25,22 @@ public class Error<T> where T : class
         return $"{Key}:{Value}";
     }
 
+    public void Deconstruct(out string key, out T? value)
+    {
+        key = Key;
+        value = Value;
+    }
+
     public override bool Equals(object? obj)
     {
-        if (!__distinct)
-        {
-            return base.Equals(obj);
-        }
-
-        if (obj is null || obj is not Error<T>)
-        {
-            return false;
-        }
+        if (!Distinct)
+            return obj is Error<T> err && err.Key == Key && Value?.Equals(err.Value) is not null;
 
         return (obj as Error<T>)!.Key == Key;
     }
 
     public override int GetHashCode()
     {
-        if (!__distinct)
-        {
-            return base.GetHashCode();
-        }
-        else
-        {
-            return Key.GetHashCode();
-        }
+        return !Distinct ? HashCode.Combine(Key, Value) : Key.GetHashCode();
     }
 }

@@ -1,13 +1,14 @@
 using ErrorHandling.Exceptions;
+using ErrorHandling.Extensions;
 using ErrorHandling.Models;
 
 namespace ErrorHandling;
 
-public class ErrorHandler<T> : IDisposable where T : class
+public sealed class ErrorHandler<T> : IDisposable where T : class
 {
-    private readonly bool __distinct;
+    private readonly bool _distinct;
 
-    public IEnumerable<Error<T>> Errors { get; private set; }
+    public HashSet<Error<T>> Errors { get; }
 
     public ErrorHandler()
     {
@@ -21,40 +22,36 @@ public class ErrorHandler<T> : IDisposable where T : class
     /// <returns></returns>
     public ErrorHandler(bool distinct) : this()
     {
-        __distinct = distinct;
+        _distinct = distinct;
     }
 
     /// <summary>
-    /// add an error to list
+    /// add error to list
     /// </summary>
-    /// <param name="error">error</param>
-    public void Add(Error<T> error)
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    public void Add(string key, T? value)
     {
-        error.__distinct = __distinct;
+        var error = new Error<T>(key, value, _distinct);
 
-        Errors = Errors.Append(error);
+        Errors.Add(error);
+    }
+    
+    public T? this[string key]
+    {
+        get => Errors.GetErrorByKey(key)?.Value;
+        set => Add(key, value);
     }
 
     public void Dispose()
     {
-        if (__distinct)
-        {
-            var errors = Errors.Distinct();
+        var errors = Errors;
 
-            if (errors.Any())
-            {
-                throw new ErrorHandlerException<Error<T>>(errors);
-            }
-        }
-        else if (Errors.Any())
-        {
+        if (_distinct)
+            errors = Errors.Distinct().ToHashSet();
+
+
+        if (errors.Any())
             throw new ErrorHandlerException<Error<T>>(Errors);
-        }
     }
-}
-
-public class ErrorHandler : ErrorHandler<string>
-{
-    public ErrorHandler() : base() { }
-    public ErrorHandler(bool distinct) : base(distinct) { }
 }

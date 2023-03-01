@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <!-- <TargetFramework>net7.0</TargetFramework> -->
     <TargetFrameworks>net7.0;net6.0</TargetFrameworks>
 
     <ImplicitUsings>enable</ImplicitUsings>
@@ -9,7 +8,7 @@
     <PackageId>DevOne.Utils.ErrorHandling</PackageId>
     <Title>Error Handling</Title>
     <Authors>Marcos Venicius</Authors>
-    <PackageVersion>1.2.1</PackageVersion>
+    <PackageVersion>2.0.0</PackageVersion>
     <Description>A friendly error handling lib</Description>
     <PackageProjectUrl>https://github.com/marcos-venicius/CSharpErrorHandlingPackage</PackageProjectUrl>
     <RepositoryUrl>https://github.com/marcos-venicius/CSharpErrorHandlingPackage.git</RepositoryUrl>
