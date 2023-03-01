@@ -1,5 +1,9 @@
 # ErrorHandling
 
+
+[![Tests with .NET 7 and 6](https://github.com/marcos-venicius/CSharpErrorHandlingPackage/actions/workflows/lib-tests.yml/badge.svg)](https://github.com/marcos-venicius/CSharpErrorHandlingPackage/actions/workflows/lib-tests.yml)
+---------------
+
 ## Installation
 
 ```sh
